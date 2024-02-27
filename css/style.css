@@ -5,6 +5,10 @@
 #page-header {
   background: rgba(255, 255, 255, 0);
 }
+#player_description {
+  text-align: center;
+}
+
 /* #footer-wrap {
     color: #0d0d0d;
     background: rgba(0, 0, 0, 0.5);
